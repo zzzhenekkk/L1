@@ -11,7 +11,7 @@ func main() {
 	fmt.Scanf("%d", &n)
 
 	chanI := make(chan int)
-	//chanSignal := make(chan os.Signal)
+
 	done := make(chan struct{})
 
 	go func() {
@@ -41,12 +41,6 @@ func main() {
 		close(done)
 	})
 
-	//signal.Notify(chanSignal, syscall.SIGINT)
 	<-done
-	//<-chanSignal
-	//close(done)
-
-	//signal.Stop(chanSignal)
-	//close(chanSignal)
-
+	close(chanI)
 }
