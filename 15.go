@@ -52,4 +52,11 @@ func someFunc() {
 func main() {
 	someFunc()
 	fmt.Println(justString) // Выводим первые 100 символов строки
+
+	asd := "asdasdadasdasd"
+	fmt.Println(asd)
+	runes := []rune(asd)
+
+	fmt.Printf("%c", runes[0])
+
 }
