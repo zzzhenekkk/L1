@@ -5,29 +5,53 @@ import (
 )
 
 // binarySearch выполняет бинарный поиск элемента target в отсортированном массиве arr
-// и возвращает индекс элемента или -1, если элемент не найден.
+// возвращает индекс и булевое значение с результатом поиска
 func binarySearch(arr []int, target int) (int, bool) {
-	middle := len(arr) / 2
+	lenght := len(arr)
 
-	if middle == 0 {
-
+	if lenght == 0 {
+		return 0, false
 	}
-	for i := 0; i < len(arr); i++ {
 
+	middle := lenght / 2
+
+	current := middle
+
+	for {
+		curVal := arr[current]
+		if target > curVal {
+			current++
+			if current >= lenght {
+				return 0, false
+			}
+			if target < arr[current] {
+				return 0, false
+			}
+		} else if target < curVal {
+			current--
+			if current < 0 {
+				return 0, false
+			}
+			if target > arr[current] {
+				return 0, false
+			}
+		} else {
+			return current, true
+		}
 	}
 
 	return 0, false
 }
 
 func main() {
-	arr := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10} // инициализируем отсортированный массив.
-	target := 7                                 // элемент для поиска.
+	arr := []int{1, 7} // инициализируем отсортированный массив.
+	target := 1        // элемент для поиска.
 
 	// выполняем бинарный поиск.
-	index := binarySearch(arr, target)
+	index, found := binarySearch(arr, target)
 
 	// выводим результат поиска.
-	if index != -1 {
+	if found {
 		fmt.Printf("Element %d found at index %d.\n", target, index)
 	} else {
 		fmt.Printf("Element %d not found in the array.\n", target)
